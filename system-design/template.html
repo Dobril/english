@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title><!--TITLE--></title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +91,7 @@
     background: var(--surface);
     border-bottom: 1px solid var(--line);
   }
-  .brand { font-weight: 800; letter-spacing: -0.01em; text-decoration: none; color: var(--ink); white-space: nowrap; }
+  .brand { font-weight: 800; letter-spacing: -0.01em; text-decoration: none; color: var(--ink); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .brand small { font: 500 11px/1 var(--mono); color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-left: 10px; }
   .spacer { flex: 1; }
   .icon-btn {
@@ -272,10 +277,30 @@
     .mmd { padding: 12px; }
     dialog.zoom { width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; }
     .zoom-body { height: calc(100vh - 51px); padding: 12px; }
+    .mmd svg { max-width: 100% !important; height: auto; }
+    .zoom-body svg { max-width: none !important; }
+    h1 { font-size: 26px; }
+    h3 { font-size: 17px; }
+    body { font-size: 15.5px; }
+    .lead { font-size: 16.5px; }
+    pre.code { font-size: 12.5px; padding: 12px; }
+    .cards { grid-template-columns: minmax(0, 1fr); }
+    .pager { flex-direction: column; }
+    .pager a { max-width: none; }
+    .pager .next { margin-left: 0; }
+  }
+  @media (max-width: 480px) {
+    .topbar { padding-inline: 12px; gap: 8px; }
+    #theme-btn { width: 34px; padding: 0; font-size: 0; }
+    #theme-btn::before { content: "◐"; font-size: 16px; line-height: 1; }
+    .app { padding-inline: 12px; }
+    .page-head { margin-bottom: 14px; }
+    .mmd { padding: 8px; }
   }
   @media (prefers-reduced-motion: reduce) { .side { transition: none; } }
 </style>
-
+</head>
+<body>
 <header class="topbar">
   <button id="menu-btn" class="icon-btn" type="button" aria-label="Меню" aria-expanded="false">☰</button>
   <a class="brand" href="#home"><!--TITLE--><small>интервю подготовка</small></a>
@@ -606,3 +631,5 @@
   route();
 })();
 </script>
+</body>
+</html>
