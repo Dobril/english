@@ -1,0 +1,286 @@
+{
+  "title": "System Design Наръчник",
+  "pages": [
+    {
+      "file": "System_Design.md",
+      "slug": "patterns",
+      "group": "Основи",
+      "short": "Патерни и концепции",
+      "blurb": "Речникът на папката: устойчивост, консистентност, структури от данни, комуникация и как да структурираш отговора."
+    },
+    {
+      "file": "NFR_Checklist.md",
+      "slug": "nfr-checklist",
+      "group": "Основи",
+      "short": "Чеклист: нефункционални изисквания",
+      "blurb": "Какво да изясниш в първите пет минути: трафик, латентност, availability, консистентност, обем, сигурност, цена, и какво следва от всяко число."
+    },
+    {
+      "file": "Design_Patterns_Creational.md",
+      "slug": "dp-creational",
+      "group": "Дизайн патерни",
+      "short": "Creational: Singleton, Factory, Builder",
+      "blurb": "Singleton, Factory, Abstract Factory, Builder, Prototype, Dependency Injection с Node.js код."
+    },
+    {
+      "file": "Design_Patterns_Structural.md",
+      "slug": "dp-structural",
+      "group": "Дизайн патерни",
+      "short": "Structural: Adapter, Decorator, Proxy",
+      "blurb": "Adapter, Decorator, Facade, Proxy, Composite, Bridge, Flyweight с Node.js код."
+    },
+    {
+      "file": "Design_Patterns_Behavioral.md",
+      "slug": "dp-behavioral",
+      "group": "Дизайн патерни",
+      "short": "Behavioral: Strategy, Observer, Command",
+      "blurb": "Strategy, Observer, Command, Chain of Responsibility, State, Template Method, Iterator, Mediator с Node.js код."
+    },
+    {
+      "file": "Design_Patterns_Node_Architecture.md",
+      "slug": "dp-node",
+      "group": "Дизайн патерни",
+      "short": "Node.js архитектурни патерни",
+      "blurb": "Middleware, Repository, DI, Outbox, Idempotency, Retry, Circuit Breaker, Streams, graceful shutdown: патерните от системите като код."
+    },
+    {
+      "file": "SOLID_DDD_Architecture_Styles.md",
+      "slug": "solid-ddd",
+      "group": "Дизайн патерни",
+      "short": "SOLID, DDD и архитектурни стилове",
+      "blurb": "SOLID с Node код, hexagonal и clean architecture, bounded contexts и aggregates, modular monolith срещу microservices, strangler fig."
+    },
+    {
+      "file": "Algorithms_Core_Patterns.md",
+      "slug": "algo-core",
+      "group": "Алгоритми",
+      "short": "Основни техники",
+      "blurb": "Big-O, binary search, two pointers, sliding window, prefix sums, heap и top-K, merge K lists, интервали, сортиране."
+    },
+    {
+      "file": "Algorithms_Graphs_Trees_Strings.md",
+      "slug": "algo-graphs",
+      "group": "Алгоритми",
+      "short": "Графи, дървета, низове",
+      "blurb": "BFS/DFS, topological sort, Dijkstra, union-find, trie, LRU/LFU кеш, edit distance, rolling hash."
+    },
+    {
+      "file": "Algorithms_Distributed_Systems.md",
+      "slug": "algo-distributed",
+      "group": "Алгоритми",
+      "short": "Разпределени системи в код",
+      "blurb": "Consistent hashing, Bloom filter, Count-Min sketch, HyperLogLog, reservoir sampling, Snowflake, geohash, Merkle tree, vector clocks, backoff."
+    },
+    {
+      "file": "Algorithms_JavaScript_Runtime.md",
+      "slug": "algo-js",
+      "group": "Алгоритми",
+      "short": "JavaScript и Node.js въпроси",
+      "blurb": "Event loop, debounce/throttle, promise pool, retry, memoize + single-flight, Promise.all отвътре, EventEmitter, generators, deep clone."
+    },
+    {
+      "file": "Message_Brokers_Comparison.md",
+      "slug": "message-brokers",
+      "group": "Градивни блокове",
+      "short": "Message brokers",
+      "blurb": "Kafka, NATS core и JetStream, RabbitMQ, SQS/SNS, Redis Streams, Postgres като опашка: request/reply, ordering, replay, ack, DLQ, backpressure, кога кой."
+    },
+    {
+      "file": "Consensus_Consistency_Models.md",
+      "slug": "consensus",
+      "group": "Градивни блокове",
+      "short": "Консенсус и консистентност",
+      "blurb": "Linearizability до eventual, Raft отвътре, Paxos, ZooKeeper/etcd рецепти, fencing, часовници, FLP и CAP без митове."
+    },
+    {
+      "file": "Networking_Load_Balancing.md",
+      "slug": "networking",
+      "group": "Градивни блокове",
+      "short": "Мрежа и балансиране",
+      "blurb": "DNS, TCP/TLS, L4 срещу L7, алгоритми за балансиране, health checks, HTTP/1.1 срещу 2 срещу 3, gRPC и балансери, CDN, service mesh."
+    },
+    {
+      "file": "Database_Internals_Postgres.md",
+      "slug": "database-internals",
+      "group": "Градивни блокове",
+      "short": "Postgres отвътре",
+      "blurb": "Isolation levels и аномалии, MVCC, локове, индекси, EXPLAIN, PgBouncer, репликация, миграции без downtime, избор на база."
+    },
+    {
+      "file": "API_Design.md",
+      "slug": "api-design",
+      "group": "Градивни блокове",
+      "short": "API дизайн",
+      "blurb": "REST правила, статус кодове и грешки, версии, ETag и Idempotency-Key, gRPC, GraphQL, WebSocket/SSE, webhooks, договори."
+    },
+    {
+      "file": "URL_Shortener.md",
+      "slug": "url-shortener",
+      "group": "Системи",
+      "short": "URL Shortener",
+      "blurb": "Четене/писане 100:1, генериране на ключове, кеш и защита на кеша."
+    },
+    {
+      "file": "Video_platform_like_Udemy.md",
+      "slug": "video-platform",
+      "group": "Системи",
+      "short": "Video Platform",
+      "blurb": "Асинхронно транскодиране, adaptive bitrate, CDN и 70 Gbps изходящ трафик."
+    },
+    {
+      "file": "Ticketmaster.md",
+      "slug": "ticketmaster",
+      "group": "Системи",
+      "short": "Ticketmaster",
+      "blurb": "Конкуренция за 50 000 реда, лок като оптимизация, Saga и компенсации."
+    },
+    {
+      "file": "Chat_system_WhatsApp_Slack _Messenger.md",
+      "slug": "chat",
+      "group": "Системи",
+      "short": "Chat System",
+      "blurb": "Милиони WebSocket връзки, подредба, идемпотентност и гарантирана доставка."
+    },
+    {
+      "file": "Distributed_Web_Crawler.md",
+      "slug": "crawler",
+      "group": "Системи",
+      "short": "Web Crawler + Rate Limiter",
+      "blurb": "Дедупликация в мащаб, politeness, frontier и атомарни лимити в Redis."
+    },
+    {
+      "file": "Notification_system.md",
+      "slug": "notifications",
+      "group": "Системи",
+      "short": "Notification System",
+      "blurb": "Outbox, приоритетни опашки, backpressure, DLQ и replay."
+    },
+    {
+      "file": "News_Feed_Timeline.md",
+      "slug": "news-feed",
+      "group": "Системи",
+      "short": "News Feed / Timeline",
+      "blurb": "Fan-out on write срещу on read, celebrity проблемът, hydration."
+    },
+    {
+      "file": "Geo_Proximity_Uber_Yelp.md",
+      "slug": "geo",
+      "group": "Системи",
+      "short": "Geo-Proximity",
+      "blurb": "Пространствено индексиране, 1.25M ъпдейта/сек, dispatch."
+    },
+    {
+      "file": "Distributed_Key_Value_Store.md",
+      "slug": "kv-store",
+      "group": "Системи",
+      "short": "Key-Value Store",
+      "blurb": "Consistent hashing, кворум, конфликти, hinted handoff, LSM."
+    },
+    {
+      "file": "File_Sync_Dropbox_Google_Drive.md",
+      "slug": "file-sync",
+      "group": "Системи",
+      "short": "File Sync",
+      "blurb": "Chunking, дедупликация, дельта синхронизация, конфликти."
+    },
+    {
+      "file": "Search_Autocomplete_Typeahead.md",
+      "slug": "autocomplete",
+      "group": "Системи",
+      "short": "Search Autocomplete",
+      "blurb": "Под 100 ms, предварително изчислен top-K, offline/online разделяне."
+    },
+    {
+      "file": "Payment_System_Stripe_Wallet.md",
+      "slug": "payments",
+      "group": "Системи",
+      "short": "Payment System",
+      "blurb": "Двойно счетоводство, идемпотентност до PSP, webhooks, reconciliation, state machine на плащането."
+    },
+    {
+      "file": "Hotel_Reservation_Airbnb.md",
+      "slug": "hotel-reservation",
+      "group": "Системи",
+      "short": "Hotel Reservation",
+      "blurb": "Инвентар по дата, конкуренция за последната стая, overbooking, hold с изтичане."
+    },
+    {
+      "file": "Stock_Exchange_Matching_Engine.md",
+      "slug": "stock-exchange",
+      "group": "Системи",
+      "short": "Stock Exchange",
+      "blurb": "Sequencer, детерминистичен matching engine, order book, market data, микросекунди."
+    },
+    {
+      "file": "Distributed_Message_Queue_Kafka.md",
+      "slug": "message-queue",
+      "group": "Системи",
+      "short": "Message Queue (Kafka)",
+      "blurb": "Партиции, репликация и ISR, consumer groups, offset семантики, защо е бърза."
+    },
+    {
+      "file": "Distributed_Cache_Redis.md",
+      "slug": "distributed-cache",
+      "group": "Системи",
+      "short": "Distributed Cache",
+      "blurb": "Hash slots, репликация и failover, eviction, консистентност кеш/база, горещи ключове."
+    },
+    {
+      "file": "Object_Storage_S3.md",
+      "slug": "object-storage",
+      "group": "Системи",
+      "short": "Object Storage (S3)",
+      "blurb": "Метаданни срещу данни, erasure coding, durability, чексуми, малки обекти, versioning."
+    },
+    {
+      "file": "Distributed_Job_Scheduler.md",
+      "slug": "job-scheduler",
+      "group": "Системи",
+      "short": "Job Scheduler",
+      "blurb": "Due jobs, leader с lease, at-least-once изпълнение, misfire, cron срещу durable workflows."
+    },
+    {
+      "file": "Metrics_Monitoring_Alerting.md",
+      "slug": "metrics",
+      "group": "Системи",
+      "short": "Metrics & Alerting",
+      "blurb": "Time series, pull срещу push, кардиналност, TSDB компресия, alert състояния, SLO burn rate."
+    },
+    {
+      "file": "Ad_Click_Aggregation.md",
+      "slug": "ad-click",
+      "group": "Системи",
+      "short": "Ad Click Aggregation",
+      "blurb": "Stream агрегация по прозорци, watermarks и late events, exactly-once, lambda срещу kappa."
+    },
+    {
+      "file": "Collaborative_Editing_Google_Docs.md",
+      "slug": "collab-editing",
+      "group": "Системи",
+      "short": "Collaborative Editing",
+      "blurb": "OT срещу CRDT, един owner на документ, оп лог и snapshots, presence."
+    },
+    {
+      "file": "Search_Engine_Inverted_Index.md",
+      "slug": "search-engine",
+      "group": "Системи",
+      "short": "Search Engine",
+      "blurb": "Inverted index, posting lists, шардиране по документ, scatter-gather, двуфазен ranking."
+    },
+    {
+      "file": "Auth_Session_OAuth_SSO.md",
+      "slug": "auth",
+      "group": "Системи",
+      "short": "Auth & Sessions",
+      "blurb": "Сесии срещу JWT, refresh rotation, OAuth 2.0 + PKCE, OIDC, SSO, revocation, MFA."
+    },
+    {
+      "file": "Online_Trading_Game.md",
+      "slug": "online-trading-game",
+      "group": "Системи",
+      "short": "Online Trading Game",
+      "blurb": "HIGH/LOW игра с реални цени: един owner на игра, NATS вместо HTTP, lease + fencing epoch, resync вместо replay, турнир с 10 000 играчи на дялове."
+    }
+  ],
+  "external": []
+}
