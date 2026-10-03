@@ -1,0 +1,66 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Only one deploy at a time; a newer push cancels nothing, it just waits.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  # Projects to build and publish. Each is a folder in the repo root with
+  # "npm run build" producing dist/. Add a new project by appending its folder name.
+  PROJECTS: english claude-code ai-engineer
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Build all projects
+        run: |
+          set -euo pipefail
+          mkdir -p site
+          for p in $PROJECTS; do
+            echo "::group::Build $p"
+            (cd "$p" && npm ci && npm run build)
+            cp -r "$p/dist" "site/$p"
+            echo "::endgroup::"
+          done
+
+      - name: Generate root index
+        run: |
+          {
+            echo '<!doctype html><meta charset="utf-8"><title>static</title><ul>'
+            for p in $PROJECTS; do echo "<li><a href=\"$p/\">$p</a></li>"; done
+            echo '</ul>'
+          } > site/index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
