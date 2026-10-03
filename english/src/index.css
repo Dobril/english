@@ -1,0 +1,368 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant fine (@media (hover: hover) and (pointer: fine));
+
+:root {
+  color-scheme: light;
+  --bg: #f2f4f8;
+  --card: #ffffff;
+  --card2: #eef1f6;
+  --border: #dde2ea;
+  --text: #151a26;
+  --muted: #5d6677;
+  --accent: #2f6fed;
+  --accent-ink: #ffffff;
+  --accent-soft: #dfe8fb;
+  --green: #1a7f45;
+  --green-soft: #ddf3e4;
+  --green-border: #8ccfa5;
+  --red: #c23f2a;
+  --red-soft: #fbe3de;
+  --red-border: #e9a698;
+  --line: #5c8ff2;
+  --kbd: #e5e9f0;
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #0e131c;
+  --card: #151b26;
+  --card2: #1b2230;
+  --border: #252d3b;
+  --text: #e7eaf0;
+  --muted: #8b93a4;
+  --accent: #a9c6f9;
+  --accent-ink: #0f1a2e;
+  --accent-soft: #1f2b45;
+  --green: #8fdca8;
+  --green-soft: #17301f;
+  --green-border: #3f7d55;
+  --red: #f2a48e;
+  --red-soft: #3b211c;
+  --red-border: #8a4a3a;
+  --line: #6f9cf5;
+  --kbd: #262e3d;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card2: var(--card2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-green-border: var(--green-border);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-red-border: var(--red-border);
+  --color-line: var(--line);
+  --color-kbd: var(--kbd);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+html {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+}
+
+@layer components {
+.tap {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.blank {
+  display: inline-block;
+  min-width: 2.2em;
+  border-bottom: 3px solid var(--line);
+  line-height: 1;
+  vertical-align: baseline;
+  margin: 0 0.1em;
+  text-align: center;
+}
+
+.blank.active {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.marker {
+  text-decoration: underline dotted var(--muted);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.kbd {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--border);
+  background: var(--kbd);
+  color: var(--muted);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+  border-radius: 0.9rem;
+}
+/* Hover and press effects only where a real pointer exists. On iOS Safari a filter or
+   transform applied during the tap can make the tap lose its target. */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary {
+    transition: filter 0.12s ease, transform 0.08s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.06);
+  }
+  .btn-primary:active {
+    transform: scale(0.985);
+  }
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  filter: none;
+  transform: none;
+  cursor: default;
+}
+
+.btn-ghost {
+  color: var(--text);
+  font-weight: 700;
+  border-radius: 0.9rem;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-ghost {
+    transition: background 0.12s ease;
+  }
+  .btn-ghost:hover {
+    background: var(--card2);
+  }
+}
+
+.choice {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 0.9rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+@media (hover: hover) and (pointer: fine) {
+  .choice {
+    transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+  }
+  .choice:not(:disabled):hover {
+    background: var(--card2);
+    border-color: var(--muted);
+  }
+  .choice:not(:disabled):active {
+    transform: scale(0.97);
+  }
+}
+.choice.ok {
+  background: var(--green-soft);
+  border-color: var(--green-border);
+  color: var(--green);
+}
+.choice.bad {
+  background: var(--red-soft);
+  border-color: var(--red-border);
+  color: var(--red);
+}
+.choice.dim {
+  opacity: 0.55;
+}
+
+.input {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  outline: none;
+}
+@media (min-width: 640px) {
+  .input {
+    border-radius: 0.9rem;
+    padding: 0.9rem 1rem;
+    font-size: 1.15rem;
+  }
+}
+.input:focus {
+  border-color: var(--line);
+}
+.input::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+.input.ok {
+  background: var(--green-soft);
+  border-color: var(--green-border);
+  color: var(--green);
+}
+.input.bad {
+  background: var(--red-soft);
+  border-color: var(--red-border);
+  color: var(--red);
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 0.7rem;
+  padding: 0.4rem 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
+@media (min-width: 640px) {
+  .chip {
+    padding: 0.5rem 0.75rem;
+    font-size: 1.35rem;
+  }
+}
+.chip.sel {
+  background: var(--accent-soft);
+  border-color: var(--line);
+}
+.chip.ok {
+  background: var(--green-soft);
+  border-color: var(--green-border);
+  color: var(--green);
+}
+.chip.bad {
+  background: var(--red-soft);
+  border-color: var(--red-border);
+  color: var(--red);
+}
+.chip.missed {
+  border-color: var(--line);
+  border-style: dashed;
+  color: var(--accent);
+}
+
+.speak-word {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  border-radius: 0.5rem;
+}
+@media (hover: hover) and (pointer: fine) {
+  .speak-word {
+    transition: background 0.12s ease;
+  }
+  .speak-word:hover {
+    background: var(--card2);
+  }
+  .speak-word:active {
+    opacity: 0.6;
+  }
+}
+
+input[type='checkbox'] {
+  accent-color: var(--accent);
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+select {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: 0.45rem 0.6rem;
+  min-height: 2.5rem;
+}
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .tri {
+  transform: rotate(90deg);
+}
+.tri {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+}
+
+/* Unlayered on purpose: the claude.ai Artifact wrapper sets its own unlayered body styles
+   (off-white ground, dark text, 14px system font), and only unlayered rules can beat them. */
+html {
+  background: var(--bg);
+  color: var(--text);
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.dark {
+  color-scheme: dark;
+}
