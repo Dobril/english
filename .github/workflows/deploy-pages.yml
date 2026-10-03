@@ -38,13 +38,8 @@ jobs:
             echo "::endgroup::"
           done
 
-      - name: Generate root index
-        run: |
-          {
-            echo '<!doctype html><meta charset="utf-8"><title>static</title><ul>'
-            for p in $PROJECTS; do echo "<li><a href=\"$p/\">$p</a></li>"; done
-            echo '</ul>'
-          } > site/index.html
+      - name: Copy root index
+        run: cp index.html site/index.html
 
       - uses: actions/configure-pages@v5
 

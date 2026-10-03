@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Проекти</title>
+    <meta name="description" content="Наръчници и приложения: Claude Code, Claude Desktop, AI Engineer, System Design, English Master." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <style>
+      :root {
+        --bg: #F3F5F8;
+        --surface: #FFFFFF;
+        --surface-2: #E9EDF2;
+        --fg: #18212B;
+        --muted: #5B6978;
+        --line: #D3DAE2;
+        --accent: #0B7A72;
+        --accent-ink: #075E58;
+        --accent-soft: #D7EEEB;
+        --warm: #A2601A;
+        --warm-soft: #F5E7D5;
+        --blue: #2F6FB3;
+        --blue-soft: #DCE8F7;
+        --violet: #8A3FB8;
+        --violet-soft: #EBDDF6;
+        --font-display: 'Golos Text', 'IBM Plex Sans', system-ui, sans-serif;
+        --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0F141A; --surface: #161D25; --surface-2: #1F2832; --fg: #E6EAEF; --muted: #98A4B2; --line: #2A3540;
+          --accent: #2FC4B6; --accent-ink: #7FDCD2; --accent-soft: #123A37;
+          --warm: #E0A258; --warm-soft: #3A2A14;
+          --blue: #7FB3F0; --blue-soft: #16283E;
+          --violet: #C79AEA; --violet-soft: #2C1B3B;
+          color-scheme: dark;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0F141A; --surface: #161D25; --surface-2: #1F2832; --fg: #E6EAEF; --muted: #98A4B2; --line: #2A3540;
+        --accent: #2FC4B6; --accent-ink: #7FDCD2; --accent-soft: #123A37;
+        --warm: #E0A258; --warm-soft: #3A2A14;
+        --blue: #7FB3F0; --blue-soft: #16283E;
+        --violet: #C79AEA; --violet-soft: #2C1B3B;
+        color-scheme: dark;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.55;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+      .wrap { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+      header { padding: clamp(40px, 8vw, 88px) 0 clamp(24px, 4vw, 40px); }
+      .eyebrow { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+      h1 {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: clamp(1.9rem, 5vw, 3rem);
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin: 10px 0 0;
+        text-wrap: balance;
+      }
+      .lede { margin: 14px 0 0; max-width: 60ch; color: var(--muted); font-size: 1.05rem; }
+
+      main { flex: 1; padding-bottom: 64px; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 14px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 176px;
+        padding: 20px 20px 18px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        text-decoration: none;
+        color: var(--fg);
+        position: relative;
+        transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+      }
+      .card:hover, .card:focus-visible {
+        transform: translateY(-2px);
+        border-color: var(--c);
+        box-shadow: 0 8px 24px -16px var(--c);
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 4px;
+        border-radius: 14px 0 0 14px;
+        background: var(--c);
+      }
+      .card .num {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1.9rem;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: var(--c);
+      }
+      .card h2 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.2rem;
+        line-height: 1.2;
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+      .card p { margin: 0; color: var(--muted); font-size: 0.95rem; flex: 1; }
+      .card .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .chip {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: var(--soft);
+        color: var(--c);
+      }
+      .card .go {
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--muted);
+        transition: color 120ms ease, transform 120ms ease;
+      }
+      .card:hover .go { color: var(--c); transform: translateX(2px); }
+
+      .c-teal { --c: var(--accent); --soft: var(--accent-soft); }
+      .c-warm { --c: var(--warm); --soft: var(--warm-soft); }
+      .c-blue { --c: var(--blue); --soft: var(--blue-soft); }
+      .c-violet { --c: var(--violet); --soft: var(--violet-soft); }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 18px 0 28px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        justify-content: space-between;
+      }
+      footer a { color: var(--accent-ink); text-decoration: none; }
+      footer a:hover { text-decoration: underline; }
+
+      @media (max-width: 480px) {
+        .card { min-height: 0; padding: 18px 16px 16px; }
+        .card .num { font-size: 1.6rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card, .card .go { transition: none; }
+        .card:hover { transform: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <div class="eyebrow">static · github pages</div>
+        <h1>Наръчници и приложения</h1>
+        <p class="lede">Пет самостоятелни проекта в едно репо. Всеки се отваря в собствена папка и работи без сървър.</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <ul class="grid">
+          <li>
+            <a class="card c-teal" href="claude-code/">
+              <span class="go" aria-hidden="true">→</span>
+              <span class="num">01</span>
+              <h2>Наръчник за Claude Code</h2>
+              <p>Как се работи с Claude Code: процес по задача, Linear, промптове, проверка, hooks, subagents, skills, MCP.</p>
+              <span class="meta"><span class="chip">BG / EN</span><span class="chip">разработка</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="card c-teal" href="claude-desktop/">
+              <span class="go" aria-hidden="true">→</span>
+              <span class="num">02</span>
+              <h2>Наръчник за Claude Desktop</h2>
+              <p>Chat и Cowork за офис работа: брифове, Excel, презентации, документи, анализи, connectors, skills, насрочени задачи.</p>
+              <span class="meta"><span class="chip">BG / EN</span><span class="chip">офис работа</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="card c-blue" href="ai-engineer/">
+              <span class="go" aria-hidden="true">→</span>
+              <span class="num">03</span>
+              <h2>Пътна карта AI Engineer</h2>
+              <p>Фази, проекти, статии и инструменти за пътя към AI инженер, с проследяване на напредъка.</p>
+              <span class="meta"><span class="chip">BG</span><span class="chip">учене</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="card c-violet" href="system-design/">
+              <span class="go" aria-hidden="true">→</span>
+              <span class="num">04</span>
+              <h2>System Design</h2>
+              <p>Документи по системен дизайн и алгоритми: кешове, опашки, бази данни, API, платежни системи, с диаграми.</p>
+              <span class="meta"><span class="chip">EN</span><span class="chip">справочник</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="card c-warm" href="english/">
+              <span class="go" aria-hidden="true">→</span>
+              <span class="num">05</span>
+              <h2>English Master</h2>
+              <p>Упражнения по английска граматика и произношение за българи. Работи изцяло в браузъра и помни напредъка.</p>
+              <span class="meta"><span class="chip">BG → EN</span><span class="chip">приложение</span></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>Деплой през GitHub Actions при всеки push в main.</span>
+        <a href="https://github.com/dobrilbozhilov/static">github.com/dobrilbozhilov/static</a>
+      </div>
+    </footer>
+  </body>
+</html>
