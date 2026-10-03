@@ -1,0 +1,28 @@
+import type { Term } from '../../../data/types'
+
+export const terms: Term[] = [
+  { term: 'Agentic loop', en: 'agentic loop', def: 'Цикълът, в който Claude чете контекста, избира инструмент (четене, редакция, Bash), вижда резултата и продължава, докато задачата не е готова. Затова Claude Code не е чат, а изпълнител.', page: '/how-it-works' },
+  { term: 'Контекстен прозорец', en: 'context window', def: 'Всичко, което моделът "вижда" в момента: системен промпт, CLAUDE.md, разговорът, прочетените файлове, изходът от команди. Пълни се бързо и качеството пада с пълненето.', page: '/how-it-works' },
+  { term: 'Компактиране', en: 'compaction', def: 'Свиване на историята на разговора в резюме, за да се освободи контекст. Автоматично при наближаване на лимита или ръчно с /compact.', page: '/how-it-works' },
+  { term: 'Checkpoint', en: 'checkpoint', def: 'Снимка на разговора и файловете преди всеки твой промпт. Връщаш се с /rewind или Esc Esc. Не замества git.', page: '/git' },
+  { term: 'Plan mode', en: 'plan mode', def: 'Режим само за четене, в който Claude изследва и пише план, без да променя нищо. Shift+Tab или /plan.', page: '/workflow' },
+  { term: 'Auto mode', en: 'auto mode', def: 'Режим на разрешения, в който класификатор одобрява рутинните действия и спира рисковите, вместо ти да отговаряш на всеки въпрос.', page: '/keys' },
+  { term: 'CLAUDE.md', def: 'Markdown файл, който Claude чете в началото на всяка сесия: команди на проекта, стил, правила. Дългосрочната памет на проекта.', page: '/claude-md' },
+  { term: 'Auto memory', en: 'auto memory', def: 'Бележки, които Claude сам си записва между сесиите (MEMORY.md). Управлява се с /memory.', page: '/claude-md' },
+  { term: 'Hook', en: 'hook', def: 'Скрипт, който се изпълнява автоматично в определен момент (преди инструмент, след редакция, при край на ход). Детерминистичен, за разлика от инструкция в CLAUDE.md.', page: '/hooks' },
+  { term: 'Subagent', en: 'subagent', def: 'Отделен Claude със собствен контекст и набор инструменти, на който основната сесия делегира задача и получава обратно само резюме.', page: '/subagents' },
+  { term: 'Skill', en: 'skill', def: 'Папка със SKILL.md: знания или повтаряем работен процес, който Claude зарежда при нужда или ти извикваш с /име.', page: '/skills' },
+  { term: 'Slash команда', en: 'slash command', def: 'Команда, започваща с /. Вградени (напр. /clear) или твои (skills в .claude/skills/).', page: '/commands' },
+  { term: 'MCP', en: 'Model Context Protocol', def: 'Отворен протокол, чрез който Claude получава инструменти от външни системи: Linear, GitHub, бази данни, браузър.', page: '/mcp' },
+  { term: 'Worktree', en: 'git worktree', def: 'Отделна работна копия на репото в друга папка и branch. Позволява няколко сесии на Claude паралелно без конфликти.', page: '/parallel' },
+  { term: 'Headless режим', en: 'headless, -p', def: 'Claude без интерактивен интерфейс: claude -p "промпт". За скриптове, CI и pre-commit.', page: '/parallel' },
+  { term: 'Plugin', en: 'plugin', def: 'Пакет от skills, hooks, subagents и MCP сървъри, който се инсталира с една команда.', page: '/skills' },
+  { term: 'Allow / deny списък', en: 'permission rules', def: 'Правила в settings.json кои инструменти и команди да минават без въпрос и кои са забранени.', page: '/setup' },
+  { term: 'Extended thinking', en: 'extended thinking', def: 'Моделът "мисли" преди отговора. При най-новите модели е винаги включено. По-добър резултат срещу повече токени.', page: '/how-it-works' },
+  { term: 'Effort', en: 'effort level', def: 'Колко дълбоко да разсъждава моделът: low до max. Сменя се с /effort.', page: '/commands' },
+  { term: 'Критерии за готово', en: 'acceptance criteria', def: 'Проверими условия, при които задачата е завършена. До 5 на задача. Основата на добра Linear задача и добър промпт.', page: '/linear' },
+  { term: 'AI-ready задача', en: 'AI-ready issue', def: 'Задача с малък обхват (до няколко файла), ясни критерии, едно репо и без известни капани. Най-високият процент успех при делегиране.', page: '/linear' },
+  { term: 'Verification loop', en: 'verification loop', def: 'Проверка, която Claude сам може да пусне и прочете: тестове, build, lint, скрийншот. Превръща "изглежда готово" в "проверено готово".', page: '/verify' },
+  { term: 'Adversarial review', en: 'adversarial review', def: 'Преглед на diff-а от Claude в нов контекст, който не е виждал разсъжденията зад кода. /code-review или subagent.', page: '/verify' },
+  { term: 'Prompt injection', en: 'prompt injection', def: 'Злонамерени инструкции, скрити в съдържание, което Claude чете (issue, уеб страница, MCP отговор). Причина да не пускаш bypass режим с непроверени източници.', page: '/mcp' },
+]

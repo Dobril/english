@@ -1,0 +1,28 @@
+import type { Term } from '../../../data/types'
+
+export const terms: Term[] = [
+  { term: 'Agentic loop', def: 'The cycle in which Claude reads context, picks a tool (read, edit, Bash), sees the result and continues until the task is done. This is why Claude Code is an executor, not a chat.', page: '/how-it-works' },
+  { term: 'Context window', def: 'Everything the model "sees" right now: system prompt, CLAUDE.md, the conversation, files it has read, command output. It fills up fast and quality drops as it fills.', page: '/how-it-works' },
+  { term: 'Compaction', def: 'Condensing the conversation history into a summary to free context. Automatic when approaching the limit, or manual with /compact.', page: '/how-it-works' },
+  { term: 'Checkpoint', def: 'A snapshot of the conversation and files before each of your prompts. Go back with /rewind or Esc Esc. Not a replacement for git.', page: '/git' },
+  { term: 'Plan mode', def: 'A read-only mode in which Claude explores and writes a plan without changing anything. Shift+Tab or /plan.', page: '/workflow' },
+  { term: 'Auto mode', def: 'A permission mode in which a classifier approves routine actions and stops risky ones, instead of you answering every prompt.', page: '/keys' },
+  { term: 'CLAUDE.md', def: 'A Markdown file Claude reads at the start of every session: project commands, style, rules. The project\'s long-term memory.', page: '/claude-md' },
+  { term: 'Auto memory', def: 'Notes Claude writes for itself between sessions (MEMORY.md). Managed with /memory.', page: '/claude-md' },
+  { term: 'Hook', def: 'A script that runs automatically at a given moment (before a tool, after an edit, when a turn ends). Deterministic, unlike an instruction in CLAUDE.md.', page: '/hooks' },
+  { term: 'Subagent', def: 'A separate Claude with its own context and tool set, to which the main session delegates a task and gets back only a summary.', page: '/subagents' },
+  { term: 'Skill', def: 'A folder with a SKILL.md: knowledge or a repeatable workflow that Claude loads when needed or that you invoke with /name.', page: '/skills' },
+  { term: 'Slash command', def: 'A command starting with /. Built-in (e.g. /clear) or your own (skills in .claude/skills/).', page: '/commands' },
+  { term: 'MCP', en: 'Model Context Protocol', def: 'An open protocol through which Claude gets tools from external systems: Linear, GitHub, databases, the browser.', page: '/mcp' },
+  { term: 'Worktree', en: 'git worktree', def: 'A separate working copy of the repo in another folder and branch. Lets several Claude sessions run in parallel without conflicts.', page: '/parallel' },
+  { term: 'Headless mode', en: 'headless, -p', def: 'Claude without the interactive interface: claude -p "prompt". For scripts, CI and pre-commit.', page: '/parallel' },
+  { term: 'Plugin', def: 'A bundle of skills, hooks, subagents and MCP servers installed with one command.', page: '/skills' },
+  { term: 'Allow / deny list', en: 'permission rules', def: 'Rules in settings.json for which tools and commands run without asking and which are forbidden.', page: '/setup' },
+  { term: 'Extended thinking', def: 'The model "thinks" before answering. Always on in the newest models. Better results for more tokens.', page: '/how-it-works' },
+  { term: 'Effort', en: 'effort level', def: 'How deeply the model reasons: low to max. Changed with /effort.', page: '/commands' },
+  { term: 'Acceptance criteria', def: 'Verifiable conditions under which the task is complete. Up to 5 per issue. The basis of a good Linear issue and a good prompt.', page: '/linear' },
+  { term: 'AI-ready issue', def: 'An issue with a small scope (a few files), clear criteria, one repo and no known traps. The highest success rate when delegated.', page: '/linear' },
+  { term: 'Verification loop', def: 'A check Claude can run and read itself: tests, build, lint, screenshot. Turns "looks done" into "verified done".', page: '/verify' },
+  { term: 'Adversarial review', def: 'A review of the diff by Claude in a fresh context that has not seen the reasoning behind the code. /code-review or a subagent.', page: '/verify' },
+  { term: 'Prompt injection', def: 'Malicious instructions hidden in content Claude reads (an issue, a web page, an MCP response). A reason not to run bypass mode with unverified sources.', page: '/mcp' },
+]

@@ -1,0 +1,114 @@
+import type { Tool } from './types'
+
+export const toolCategories = [
+  'Езици и бази',
+  'Backend и интерфейс',
+  'Модели и достъп до тях',
+  'RAG и търсене',
+  'Агенти',
+  'Evals и наблюдаемост',
+  'Fine-tuning и ML',
+  'Инфраструктура и деплой',
+] as const
+
+export const tools: Tool[] = [
+  // Езици и бази
+  { name: 'Python', category: 'Езици и бази', what: 'Основният език на цялата AI екосистема. Всички ML библиотеки, SDK-та на доставчиците и frameworks излизат първо на Python.', where: 'RAG сървър, ingestion pipelines, агенти, evals, fine-tuning, notebooks за експерименти. Всичко, което докосва данни или модели.', depth: 'perfect', url: 'https://docs.python.org/3/' },
+  { name: 'TypeScript / Node.js', category: 'Езици и бази', what: 'Езикът на интерфейсите и интеграциите. Anthropic, OpenAI и Vercel AI SDK имат пълни TypeScript версии; половината MCP сървъри са на TypeScript.', where: 'Chat интерфейси (Next.js), ботове за Slack и Telegram, MCP сървъри до frontend-а, edge функции. Не се ползва за ML, embeddings или fine-tuning.', depth: 'decent' },
+  { name: 'SQL и PostgreSQL', category: 'Езици и бази', what: 'Релационна база, която с разширението pgvector става и векторна. Една база за всичко в повечето проекти.', where: 'Документи, chunk-ове с вектори, история на разговори, логове на цена, checkpoints на агенти, full-text търсене за hybrid search.', depth: 'decent', url: 'https://www.postgresql.org/docs/' },
+  { name: 'Bash и Linux', category: 'Езици и бази', what: 'Командният ред, environment променливи, процеси, SSH към машина с GPU.', where: 'Всеки деплой, всеки нает GPU, всеки скрипт за ingestion.', depth: 'decent' },
+
+  // Backend и интерфейс
+  { name: 'FastAPI', category: 'Backend и интерфейс', what: 'Async Python web framework с Pydantic валидация и автоматична OpenAPI документация. Стандартът за AI backend-и.', where: 'API за RAG и агенти, стрийминг с SSE или WebSocket, webhooks, вътрешни услуги, които Node или UI викат.', depth: 'perfect', url: 'https://fastapi.tiangolo.com/' },
+  { name: 'Pydantic', category: 'Backend и интерфейс', what: 'Валидация и схеми за данни чрез Python типове. Моделите на доставчиците връщат JSON по схема, която Pydantic описва.', where: 'Structured outputs от модели, схеми на инструменти за tool use, конфигурация, валидация на вход и изход.', depth: 'perfect', url: 'https://docs.pydantic.dev/' },
+  { name: 'asyncio и httpx', category: 'Backend и интерфейс', what: 'Async I/O в Python и async HTTP клиент. Заявките към модели са бавни и много, затова паралелизмът е задължителен.', where: 'Паралелни заявки към модели и embedding API, стрийминг, ограничаване на паралелизма със семафори.', depth: 'decent', url: 'https://www.python-httpx.org/' },
+  { name: 'uv', category: 'Backend и интерфейс', what: 'Бърз мениджър на пакети и виртуални среди за Python. Заменя pip, venv и poetry.', where: 'Всеки Python проект.', depth: 'decent', url: 'https://docs.astral.sh/uv/' },
+  { name: 'pytest', category: 'Backend и интерфейс', what: 'Тестова библиотека за Python. Evals често се пишат като pytest тестове.', where: 'Unit тестове на pipeline-а, evals, тестове на инструменти за агенти.', depth: 'decent', url: 'https://docs.pytest.org/' },
+  { name: 'Redis', category: 'Backend и интерфейс', what: 'In-memory хранилище за ключ и стойност, опашки и pub/sub.', where: 'Кеш на отговори, semantic cache, опашки за ingestion, rate limiting, история на разговори за ботове.', depth: 'decent', url: 'https://redis.io/docs/' },
+  { name: 'arq / Celery', category: 'Backend и интерфейс', what: 'Опашки за фонови задачи на Python. arq е малък и async, Celery е големият стандарт.', where: 'Ingestion на документи, дълги агентски задачи, batch обработка. Научи един от двата.', depth: 'decent', url: 'https://arq-docs.helpmanual.io/' },
+  { name: 'Next.js', category: 'Backend и интерфейс', what: 'React framework за web приложения, със server components и API routes.', where: 'Chat интерфейси, админ панели, dashboards за цена и evals.', depth: 'decent', url: 'https://nextjs.org/docs' },
+  { name: 'Vercel AI SDK', category: 'Backend и интерфейс', what: 'TypeScript библиотека за стрийминг UI, tool calling и единен API към доставчиците. useChat hook за React.', where: 'Всеки chat интерфейс. При прости приложения без RAG може да е и целият backend.', depth: 'decent', url: 'https://ai-sdk.dev/docs' },
+  { name: 'Streamlit / Gradio / Chainlit', category: 'Backend и интерфейс', what: 'Python библиотеки за бързи интерфейси без frontend код. Gradio е стандартът в Hugging Face демота.', where: 'Прототипи и вътрешни инструменти за 30 минути. Не за продукт с потребители.', depth: 'surface', url: 'https://docs.streamlit.io/' },
+
+  // Модели и достъп
+  { name: 'Anthropic API и Claude SDK', category: 'Модели и достъп до тях', what: 'API-то на Claude моделите: Messages, tool use, structured outputs, стрийминг, prompt caching, batch, vision, PDF.', where: 'Основният модел в проектите от картата. Агенти, RAG генерация, извличане на данни.', depth: 'perfect', url: 'https://docs.claude.com/' },
+  { name: 'OpenAI API', category: 'Модели и достъп до тях', what: 'API-то на GPT моделите със същите възможности: function calling, structured outputs, embeddings, Responses API.', where: 'Втори доставчик за fallback и сравнения. Embeddings API. Много примери в интернет са за него.', depth: 'decent', url: 'https://platform.openai.com/docs' },
+  { name: 'Google Gemini API', category: 'Модели и достъп до тях', what: 'Моделите на Google, с много дълъг контекст и силна multimodal поддръжка.', where: 'Трети доставчик, задачи с дълъг контекст или видео.', depth: 'surface', url: 'https://ai.google.dev/' },
+  { name: 'Отворени модели (Llama, Qwen, Mistral, Gemma, DeepSeek)', category: 'Модели и достъп до тях', what: 'Модели с публични тегла, които пускаш на собствен хардуер. Qwen и Llama са най-честият избор за fine-tuning.', where: 'Локално изпълнение, self-hosting за цена или поверителност, fine-tuning. Знай кой е добър за какво и колко VRAM иска.', depth: 'decent', url: 'https://huggingface.co/models' },
+  { name: 'Ollama', category: 'Модели и достъп до тях', what: 'Най-лесният начин да пуснеш отворен модел локално. Един команден ред, OpenAI-съвместим API, поддържа и embedding модели.', where: 'Локална разработка, RAG v1 изцяло офлайн, тестове без API разходи, малки self-hosted инсталации.', depth: 'decent', url: 'https://ollama.com/' },
+  { name: 'vLLM', category: 'Модели и достъп до тях', what: 'High-throughput сървър за отворени модели на GPU, с batching и OpenAI-съвместим API. Стандартът за self-hosting в продукция.', where: 'Когато трафикът е голям и API цената е по-висока от нает GPU. Пробвай го веднъж, за да знаеш числата.', depth: 'surface', url: 'https://docs.vllm.ai/' },
+  { name: 'llama.cpp и GGUF', category: 'Модели и достъп до тях', what: 'Изпълнение на квантизирани модели на CPU и на обикновени машини. GGUF е форматът. Ollama е построен върху него.', where: 'Конвертиране на fine-tune-нат модел за локално изпълнение, edge устройства.', depth: 'surface', url: 'https://github.com/ggml-org/llama.cpp' },
+  { name: 'LiteLLM', category: 'Модели и достъп до тях', what: 'Единен Python интерфейс към над 100 доставчика с OpenAI-съвместим формат. Включва proxy с лимити и логове.', where: 'Превключване между локален и cloud модел, fallback, бюджети по екип.', depth: 'decent', url: 'https://docs.litellm.ai/' },
+  { name: 'instructor', category: 'Модели и достъп до тях', what: 'Малка библиотека за structured outputs с Pydantic върху всеки доставчик, с вграден retry при невалиден отговор.', where: 'Извличане на данни, класификация, всяка задача с JSON изход. Прочети и кода ѝ, кратък е.', depth: 'decent', url: 'https://python.useinstructor.com/' },
+  { name: 'Hugging Face Hub и transformers', category: 'Модели и достъп до тях', what: 'Хранилището на отворени модели и датасети, и библиотеката за зареждането и обучението им.', where: 'Избор на embedding модел, изтегляне на модел за fine-tuning, публикуване на твой модел.', depth: 'decent', url: 'https://huggingface.co/docs' },
+  { name: 'tiktoken / tokenizers', category: 'Модели и достъп до тях', what: 'Библиотеки за токенизация. Броиш токени преди заявка, за да знаеш цена и дали се събираш в контекста.', where: 'Сметки за цена, рязане на контекст, chunking по токени.', depth: 'decent', url: 'https://github.com/openai/tiktoken' },
+  { name: 'OpenRouter', category: 'Модели и достъп до тях', what: 'Един API ключ и един endpoint за десетки доставчици и модели.', where: 'Бързи сравнения на модели без да правиш акаунт навсякъде.', depth: 'surface', url: 'https://openrouter.ai/' },
+
+  // RAG и търсене
+  { name: 'pgvector', category: 'RAG и търсене', what: 'Разширение на Postgres за вектори с HNSW индекс. Векторна база без нова инфраструктура.', where: 'Първата и за повечето проекти единствената векторна база. Chunk-ове, embeddings, метаданни и full-text в една таблица.', depth: 'perfect', url: 'https://github.com/pgvector/pgvector' },
+  { name: 'Qdrant', category: 'RAG и търсене', what: 'Специализирана векторна база на Rust с богато филтриране, квантизация и sparse вектори.', where: 'Когато pgvector не стига: десетки милиони вектори, сложни филтри, отделен сървис за търсене.', depth: 'decent', url: 'https://qdrant.tech/documentation/' },
+  { name: 'Chroma', category: 'RAG и търсене', what: 'Лека векторна база за локални експерименти, вградена в Python процеса.', where: 'Notebooks и прототипи. Много туториали я ползват.', depth: 'surface', url: 'https://docs.trychroma.com/' },
+  { name: 'Pinecone, Weaviate, Milvus, LanceDB', category: 'RAG и търсене', what: 'Други векторни бази: Pinecone е managed cloud, Weaviate и Milvus са големи self-hosted, LanceDB е embedded на файл.', where: 'Знай какво предлага всяка. Ще ги срещаш в обяви и в чужди проекти.', depth: 'surface' },
+  { name: 'Elasticsearch / OpenSearch', category: 'RAG и търсене', what: 'Пълнотекстови търсачки с BM25, които вече имат и векторно търсене.', where: 'Hybrid search в компании, които вече ги ползват. Postgres full-text е по-простата алтернатива.', depth: 'surface', url: 'https://www.elastic.co/docs' },
+  { name: 'sentence-transformers', category: 'RAG и търсене', what: 'Библиотека за локални embedding модели и cross-encoder rerankers. Два реда код за embedding.', where: 'Локални embeddings в RAG, reranking, семантична дедупликация, класификация по близост.', depth: 'decent', url: 'https://sbert.net/' },
+  { name: 'Embedding API (OpenAI, Voyage, Cohere)', category: 'RAG и търсене', what: 'Cloud embedding модели с високо качество и без GPU. Voyage е препоръчаният от Anthropic.', where: 'RAG в продукция, когато локален модел не стига по качество или език.', depth: 'decent', url: 'https://docs.voyageai.com/' },
+  { name: 'Rerankers (Cohere Rerank, bge-reranker)', category: 'RAG и търсене', what: 'Модели, които преподреждат top-20 резултата по релевантност към въпроса. Най-евтиното подобрение на RAG.', where: 'Втора стъпка след векторно или hybrid търсене, преди генерацията.', depth: 'decent', url: 'https://docs.cohere.com/docs/rerank-overview' },
+  { name: 'Docling', category: 'RAG и търсене', what: 'Парсване на PDF, DOCX и HTML в структуриран markdown със запазени таблици и заглавия. От IBM, отворен код.', where: 'Ingestion. Качеството на парсването определя качеството на RAG.', depth: 'decent', url: 'https://docling-project.github.io/docling/' },
+  { name: 'Unstructured / PyMuPDF', category: 'RAG и търсене', what: 'Алтернативи за парсване: Unstructured е голяма библиотека за всякакви формати, PyMuPDF е бърз и нисък по ниво за PDF.', where: 'Когато Docling не се справя с конкретен формат.', depth: 'surface', url: 'https://pymupdf.readthedocs.io/' },
+  { name: 'BM25 (rank-bm25, Postgres tsvector)', category: 'RAG и търсене', what: 'Класическо търсене по ключови думи. Намира точни термини, кодове и имена, които векторите пропускат.', where: 'Половината от hybrid search.', depth: 'decent', url: 'https://www.postgresql.org/docs/current/textsearch.html' },
+  { name: 'LlamaIndex', category: 'RAG и търсене', what: 'Framework, фокусиран върху RAG: loaders, chunking, индекси, query engines, оценка. По-ясен от LangChain за RAG.', where: 'Втора версия на RAG, след като си написал първата на ръка.', depth: 'decent', url: 'https://docs.llamaindex.ai/' },
+  { name: 'LangChain', category: 'RAG и търсене', what: 'Най-известният framework за LLM приложения. Голям, с много абстракции. Познавай API-то, защото ще го срещаш.', where: 'Чужди проекти и туториали. LangGraph (от същия екип) е частта, която си струва да научиш.', depth: 'surface', url: 'https://python.langchain.com/docs/' },
+  { name: 'RAGAS', category: 'RAG и търсене', what: 'Библиотека с метрики за RAG: faithfulness, answer relevance, context precision и recall.', where: 'Оценка на RAG във фаза 3 и 5.', depth: 'decent', url: 'https://docs.ragas.io/' },
+
+  // Агенти
+  { name: 'MCP (Model Context Protocol)', category: 'Агенти', what: 'Отворен протокол за свързване на модели с инструменти, данни и prompt-ове. Python и TypeScript SDK. Поддържан от Claude, Claude Code и повечето клиенти.', where: 'Всеки инструмент, който искаш да е достъпен за много агенти и клиенти. Интеграции с вътрешни системи.', depth: 'perfect', url: 'https://modelcontextprotocol.io/' },
+  { name: 'Tool use в Anthropic SDK', category: 'Агенти', what: 'Вграденият механизъм за инструменти: описваш функции с JSON schema, моделът иска извикване, ти го изпълняваш и връщаш резултат.', where: 'Основата на всеки агент. Научи го преди който и да е framework.', depth: 'perfect', url: 'https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview' },
+  { name: 'LangGraph', category: 'Агенти', what: 'Framework за агенти като графи със състояние: възли, ребра, checkpoints, прекъсване за одобрение от човек, стрийминг на стъпки.', where: 'Агенти в продукция, които трябва да спират, продължават и да имат човек в цикъла.', depth: 'decent', url: 'https://langchain-ai.github.io/langgraph/' },
+  { name: 'Pydantic AI', category: 'Агенти', what: 'Лек framework за агенти от екипа на Pydantic: типизирани инструменти, structured outputs, dependency injection, без излишни абстракции.', where: 'По-простата алтернатива на LangGraph за агенти без сложен граф.', depth: 'decent', url: 'https://ai.pydantic.dev/' },
+  { name: 'Claude Agent SDK', category: 'Агенти', what: 'SDK-то, върху което е построен Claude Code: готов агентски цикъл с инструменти за файлове, команди и MCP.', where: 'Coding агенти и автоматизации, при които не искаш да пишеш цикъла и инструментите сам.', depth: 'decent', url: 'https://docs.claude.com/en/api/agent-sdk/overview' },
+  { name: 'OpenAI Agents SDK', category: 'Агенти', what: 'Агентен framework на OpenAI с handoffs между агенти и guardrails.', where: 'Проекти, стандартизирани на OpenAI.', depth: 'surface', url: 'https://openai.github.io/openai-agents-python/' },
+  { name: 'CrewAI, AutoGen, smolagents', category: 'Агенти', what: 'Други агентни frameworks: CrewAI за роли и екипи, AutoGen (Microsoft) за multi-agent разговори, smolagents (Hugging Face) за минимални агенти с код като действия.', where: 'Знай какво предлагат. Кодът на smolagents си струва да се прочете.', depth: 'surface', url: 'https://huggingface.co/docs/smolagents' },
+  { name: 'DSPy', category: 'Агенти', what: 'Framework, който оптимизира prompt-овете автоматично спрямо метрика, вместо да ги пишеш на ръка.', where: 'Когато имаш добър eval набор и много prompt-ове за поддържане.', depth: 'surface', url: 'https://dspy.ai/' },
+  { name: 'Claude Code', category: 'Агенти', what: 'Coding агент в терминала. Ползваш го ежедневно за работа и го изучаваш като пример за архитектура: инструменти, context management, MCP, skills, hooks.', where: 'Писане на код, клиент за твоите MCP сървъри, автоматизации в CI.', depth: 'decent', url: 'https://docs.claude.com/en/docs/claude-code/overview' },
+  { name: 'Cursor и други IDE асистенти', category: 'Агенти', what: 'Редактори с вграден AI. Полезни, но архитектурно по-малко интересни от Claude Code.', where: 'Ежедневна работа, по избор.', depth: 'surface' },
+
+  // Evals и наблюдаемост
+  { name: 'Langfuse', category: 'Evals и наблюдаемост', what: 'Отворена платформа за tracing, prompt management и evals на LLM приложения. Self-hosted с Docker или cloud.', where: 'Всяка заявка в системата ти става trace с токени, цена и време. Основата на фаза 5.', depth: 'perfect', url: 'https://langfuse.com/docs' },
+  { name: 'promptfoo', category: 'Evals и наблюдаемост', what: 'Инструмент за eval suites в YAML: тестови случаи, асерции, LLM-съдия, сравнение на prompt-ове и модели, red teaming.', where: 'Регресионни тестове на prompt-ове в CI.', depth: 'decent', url: 'https://www.promptfoo.dev/docs/intro/' },
+  { name: 'OpenTelemetry', category: 'Evals и наблюдаемост', what: 'Стандарт за traces и метрики. Langfuse и повечето платформи го поддържат.', where: 'Когато AI системата трябва да се вижда в общия observability stack на компанията.', depth: 'surface', url: 'https://opentelemetry.io/docs/' },
+  { name: 'LangSmith, Braintrust, Arize Phoenix, W&B Weave', category: 'Evals и наблюдаемост', what: 'Алтернативи на Langfuse: LangSmith е от LangChain, Braintrust е силен в evals, Phoenix е отворен от Arize, Weave е от Weights & Biases.', where: 'Знай какво предлагат. Ще ги срещаш в обяви.', depth: 'surface' },
+  { name: 'DeepEval', category: 'Evals и наблюдаемост', what: 'Python библиотека с готови метрики за LLM, интегрирана с pytest.', where: 'Алтернатива на RAGAS и promptfoo за evals като тестове.', depth: 'surface', url: 'https://docs.confident-ai.com/' },
+  { name: 'Inspect AI', category: 'Evals и наблюдаемост', what: 'Framework за evals на модели от UK AI Security Institute. Използва се за сериозни бенчмаркове.', where: 'Сравнение на модели върху стандартни или собствени бенчмаркове.', depth: 'surface', url: 'https://inspect.aisi.org.uk/' },
+  { name: 'Sentry', category: 'Evals и наблюдаемост', what: 'Проследяване на грешки и performance за обикновени приложения.', where: 'Грешките извън модела: API, worker, UI.', depth: 'surface', url: 'https://docs.sentry.io/' },
+
+  // Fine-tuning и ML
+  { name: 'PyTorch', category: 'Fine-tuning и ML', what: 'Библиотеката, на която са написани почти всички модели. Тензори, autograd, training loop.', where: 'Четеш и променяш код за обучение, пишеш мини-GPT, разбираш какво правят Unsloth и TRL отдолу.', depth: 'decent', url: 'https://pytorch.org/docs/' },
+  { name: 'transformers, datasets, PEFT, TRL', category: 'Fine-tuning и ML', what: 'Четирите библиотеки на Hugging Face: модели, данни, LoRA адаптери, и SFT/DPO/GRPO обучение.', where: 'Fine-tuning във фаза 7. Всеки туториал ги ползва.', depth: 'decent', url: 'https://huggingface.co/docs/trl' },
+  { name: 'Unsloth', category: 'Fine-tuning и ML', what: 'Библиотека за 2 пъти по-бърз и по-икономичен fine-tuning с LoRA и QLoRA. Готови Colab notebooks.', where: 'Първият ти fine-tune. Работи на безплатен Colab.', depth: 'decent', url: 'https://docs.unsloth.ai/' },
+  { name: 'scikit-learn', category: 'Fine-tuning и ML', what: 'Класическото ML: логистична регресия, random forest, метрики, train/test split.', where: 'Класификация и baseline, преди да посегнеш към LLM. Често е достатъчно и 100 пъти по-евтино.', depth: 'decent', url: 'https://scikit-learn.org/stable/' },
+  { name: 'Axolotl, LLaMA-Factory', category: 'Fine-tuning и ML', what: 'Конфигурационни инструменти за fine-tuning без да пишеш код: YAML файл и команда.', where: 'По-големи training задачи на няколко GPU.', depth: 'surface', url: 'https://github.com/axolotl-ai-cloud/axolotl' },
+  { name: 'Weights & Biases / MLflow', category: 'Fine-tuning и ML', what: 'Проследяване на експерименти: loss криви, хиперпараметри, артефакти.', where: 'Всеки fine-tune, за да сравняваш пускания.', depth: 'surface', url: 'https://docs.wandb.ai/' },
+  { name: 'Jupyter / Google Colab / Kaggle', category: 'Fine-tuning и ML', what: 'Notebooks за експерименти. Colab и Kaggle дават безплатен GPU за няколко часа на ден.', where: 'Експерименти, мини-GPT, fine-tuning, визуализации на embeddings.', depth: 'decent', url: 'https://colab.research.google.com/' },
+  { name: 'numpy', category: 'Fine-tuning и ML', what: 'Числови масиви и линейна алгебра. Всичко останало стъпва на него.', where: 'Косинусова прилика, манипулиране на embeddings, бързи сметки.', depth: 'decent', url: 'https://numpy.org/doc/' },
+  { name: 'Whisper', category: 'Fine-tuning и ML', what: 'Отворен модел на OpenAI за разпознаване на реч, включително български.', where: 'Транскрипция на срещи и аудио като вход за RAG.', depth: 'surface', url: 'https://github.com/openai/whisper' },
+
+  // Инфраструктура
+  { name: 'Docker и Docker Compose', category: 'Инфраструктура и деплой', what: 'Контейнери и описание на многокомпонентна система в един файл.', where: 'Всеки проект от фаза 0 нататък: API, worker, база, Redis, Langfuse.', depth: 'decent', url: 'https://docs.docker.com/' },
+  { name: 'GitHub Actions', category: 'Инфраструктура и деплой', what: 'CI/CD в GitHub. Пуска тестове и evals при всяка промяна.', where: 'Evals при pull request, build и деплой.', depth: 'decent', url: 'https://docs.github.com/actions' },
+  { name: 'Modal / RunPod', category: 'Инфраструктура и деплой', what: 'Serverless GPU (Modal: пишеш Python функция, тя се пуска на GPU) и нает GPU по часове (RunPod).', where: 'Fine-tuning, vLLM експерименти, batch inference без собствен хардуер.', depth: 'surface', url: 'https://modal.com/docs' },
+  { name: 'AWS Bedrock / Google Vertex AI / Azure OpenAI', category: 'Инфраструктура и деплой', what: 'Моделите на Anthropic, Google и OpenAI през трите големи cloud-а, с техните права, региони и фактуриране.', where: 'Корпоративни проекти, където данните трябва да останат в определен cloud. Научи един според работата си.', depth: 'surface', url: 'https://docs.aws.amazon.com/bedrock/' },
+  { name: 'Kubernetes', category: 'Инфраструктура и деплой', what: 'Оркестрация на контейнери за големи системи.', where: 'Когато Docker Compose не стига. Обикновено го управлява друг екип.', depth: 'surface' },
+  { name: 'Grafana / Prometheus', category: 'Инфраструктура и деплой', what: 'Метрики и dashboards за инфраструктура.', where: 'Latency, грешки и натоварване на API и worker-и.', depth: 'surface', url: 'https://grafana.com/docs/' },
+]
+
+export const depthLabel: Record<Tool['depth'], string> = {
+  perfect: 'перфектно',
+  decent: 'прилично',
+  surface: 'отгоре-отгоре',
+}
+
+export const depthHint: Record<Tool['depth'], string> = {
+  perfect: 'Можеш да го ползваш без документация и да обясниш как работи отвътре.',
+  decent: 'Можеш да построиш нещо с него за ден, с документацията до теб.',
+  surface: 'Знаеш какво прави, кога се ползва и с какво се различава от алтернативите.',
+}
